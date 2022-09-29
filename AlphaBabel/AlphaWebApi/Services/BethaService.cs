@@ -4,6 +4,7 @@
 
     using AlphaWebApi.DTO;
     using System.Net;
+    using System.Text;
     using System.Text.Json;
 
     #endregion
@@ -22,10 +23,9 @@
             var client = _httpClientFactory.CreateClient("bethaService");
 
             var jsonContent = JsonSerializer.Serialize(alphaDto);
+            var stringContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var stringContent = new StringContent(jsonContent);
-
-            var response = await client.PostAsync($"api/betha", stringContent);
+            var response = await client.PostAsync($"api/betha/ReceiveMessage", stringContent);
 
             return response.StatusCode;
         }

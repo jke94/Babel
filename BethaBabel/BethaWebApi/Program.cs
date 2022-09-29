@@ -39,7 +39,6 @@ namespace BethaWebApi
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();

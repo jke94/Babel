@@ -9,7 +9,9 @@
 
     #endregion
 
-    public class BethaController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BethaController : ControllerBase
     {
         private readonly ILogger<BethaController> _logger;
 
@@ -23,17 +25,9 @@
             _alphaService = alphaService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpPost]
+        [HttpPost("SendMessage")]
         public async Task<IActionResult> SendMessage(BethaDto bethaDto)
         {
-
-            var message = $"Command: {bethaDto.Command}, Argument: {bethaDto.Argument}.";
-
             var tastResult = await _alphaService.PostAsync(bethaDto);
 
             if (tastResult != HttpStatusCode.OK)
@@ -42,6 +36,21 @@
             }
 
             return Ok(tastResult.ToString());
+        }
+
+        [HttpPost("ReceiveMessage")]
+        public IActionResult ReceiveMessage(BethaDto alphaDto)
+        {
+            if (alphaDto is null)
+            {
+                return BadRequest(alphaDto);
+            }
+
+            var message = $"Command: {alphaDto.Command}, Argument: {alphaDto.Argument}.";
+
+            _logger.LogInformation(message);
+
+            return Ok(alphaDto);
         }
     }
 }

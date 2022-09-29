@@ -28,6 +28,10 @@ namespace AlphaWebApi
 
             var app = builder.Build();
 
+            app.UseCors(builder => builder
+                .WithOrigins("http://localhost"));
+
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
