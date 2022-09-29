@@ -1,3 +1,5 @@
+using AlphaWebApi.Services;
+
 namespace AlphaWebApi
 {
     public class Program
@@ -9,7 +11,16 @@ namespace AlphaWebApi
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+
+            builder.Services.AddSingleton<IBethaService, BethaService>();
+
+
+            builder.Services.AddHttpClient("bethaService", c =>
+            {
+                c.BaseAddress = new Uri(builder.Configuration["Services:BethaService"]);
+            });
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
