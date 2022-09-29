@@ -1,7 +1,11 @@
-using AlphaWebApi.Services;
-
 namespace AlphaWebApi
 {
+    #region
+
+    using AlphaWebApi.Services;
+
+    #endregion
+
     public class Program
     {
         public static void Main(string[] args)
@@ -12,9 +16,7 @@ namespace AlphaWebApi
 
             builder.Services.AddControllers();
 
-
             builder.Services.AddSingleton<IBethaService, BethaService>();
-
 
             builder.Services.AddHttpClient("bethaService", c =>
             {

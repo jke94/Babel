@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace AlphaWebApi.Controllers
+﻿namespace AlphaWebApi.Controllers
 {
-    using AlphaWebApi.Services;
     #region using
 
-    using DTO;
     using System.Net;
+    using Microsoft.AspNetCore.Mvc;
+    using AlphaWebApi.Services;
+    using DTO;
 
     #endregion
 
