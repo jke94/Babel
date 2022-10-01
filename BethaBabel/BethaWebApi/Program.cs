@@ -1,5 +1,6 @@
 namespace BethaWebApi
 {
+    using Betha.WebApi.HostedServices;
     #region
 
     using BethaWebApi.Services;
@@ -17,6 +18,7 @@ namespace BethaWebApi
             builder.Services.AddControllers();
             
             builder.Services.AddSingleton<IAlphaService, AlphaService>();
+            builder.Services.AddSingleton<ISomeWorkHostedService, SomeWorkHostedService>();
 
             builder.Services.AddHttpClient("alphaService", c =>
             {
